@@ -1,0 +1,27 @@
+.blog-banner {
+    width: 100%;
+    height: 50vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 2rem;
+}
+.blog-section h1 {
+    text-align: center;
+    font-size: 24px;
+    color: var(--primary-color);
+    text-transform: capitalize;
+    text-decoration: underline;
+    margin-bottom: 1rem;
+}
+.blog-content {
+    padding: 0 1.5rem;
+}
+.blog-section p {
+    font-family: 'Times New Roman', Times, serif;
+    font-variant: normal;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: justify;
+    color: var(--secondary-color);
+}

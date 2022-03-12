@@ -1,0 +1,50 @@
+.blog-form {
+    margin: 0 auto;
+    height: 100%;
+    /* background-color: var(--white-color); */
+}
+
+.blog-form .s-head {
+    text-align: center;
+    color: var(--primary-color);
+    text-decoration: underline;
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+}
+
+.form-input-group {
+    display: grid;
+    column-gap: 2rem;
+    row-gap: 2rem;
+    /* margin-top: 2rem; */
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    margin-bottom: 1.8rem;
+}
+
+.form-input {
+    column-gap: 2rem;
+    background-color: white;
+}
+
+.btn-group {
+    display: flex;
+    width: 100%;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.btn-group button {
+    margin-left: 2rem;
+    border: none;
+    box-shadow: 4px 3px var(--white-color);
+    color: var(--white-color);
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    text-shadow: 2rem;
+    transition: all .3s;
+}
+
+.btn-group button:hover {
+    transform: scale(1.1)
+}

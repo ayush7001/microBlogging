@@ -1,0 +1,7 @@
+.btn {
+  padding: 12px 1.0rem;
+  border-radius: 10px;
+  text-align: center;
+  align-items: center;
+  background-color: var(--secondary-color);
+}
