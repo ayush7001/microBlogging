@@ -6,6 +6,21 @@
     background-repeat: no-repeat;
     margin-bottom: 2rem;
 }
+.blog-content h4{
+    text-align: center;
+    color: var(--primary-color);
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+}
+
+.blog-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+.blog-info span u {
+    cursor: pointer;
+}
 .blog-section h1 {
     text-align: center;
     font-size: 24px;
@@ -14,14 +29,29 @@
     text-decoration: underline;
     margin-bottom: 1rem;
 }
+
 .blog-content {
     padding: 0 1.5rem;
+}
+.edit-icon {
+    font-size: 15px;
+    text-decoration: none;
+    text-align: center;
+    align-items: center;
+    
 }
 .blog-section p {
     font-family: 'Times New Roman', Times, serif;
     font-variant: normal;
+    word-wrap: break-word;
     font-size: 20px;
     font-weight: 500;
     text-align: justify;
     color: var(--secondary-color);
+}
+
+@media screen and (max-width: 821px) {
+    .blog-section p {
+        text-align: center;
+    } 
 }

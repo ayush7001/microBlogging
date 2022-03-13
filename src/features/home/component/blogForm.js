@@ -38,7 +38,6 @@ const BlogForm = props => {
     const isDisable = useMemo(() => handleDisable(), [initialValue])
     return (
         <div className="container blog-form">
-            {console.log(initialValue)}
             <h2 className='s-head'>{props.title}</h2>
             <form onSubmit={handleSubmit}>
                 <div className='form-input-group'>

@@ -10,11 +10,12 @@ import TableRow from '@mui/material/TableRow';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import EditIcon from '@mui/icons-material/Edit';
 import { NavLink } from 'react-router-dom';
+import moment from 'moment';
 import CanActivate from '../../hoc/canActivate';
 
 const columns = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'title', label: 'Title', minWidth: 100 },
+  { id: 'authorName', label: 'Author Name', minWidth: 170 },
+  { id: 'blogTitle', label: 'Title', minWidth: 100 },
   {
     id: 'likes',
     label: 'Likes',
@@ -23,10 +24,11 @@ const columns = [
     format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'time',
+    id: 'createdAt',
     label: 'Date & Time',
-    minWidth: 170,
+    minWidth: 120,
     align: 'right',
+    type: 'date',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
@@ -59,7 +61,7 @@ const rows = [
   createData('Brazil', 'BR', 210147125, 8515767),
 ];
 
-export default function StickyHeadTable() {
+export default function StickyHeadTable(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -90,7 +92,7 @@ export default function StickyHeadTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
+            {props.list
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
@@ -100,10 +102,10 @@ export default function StickyHeadTable() {
                       return (
                         <TableCell key={`${column.id}-body-column`} align={column.align}>
                           
-                         {column.id !== "action" ? (column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value) : <> <NavLink to={`/blog/${value}`} title='View blog'><VisibilityIcon/></NavLink> {" "}  <CanActivate>
-                              <NavLink to={`/blog/edit/${value}`} title='Edit blog'><EditIcon /></NavLink>
+                         {column.id !== "action" ? (column.format && column.type === 'date'
+                            ? moment(value).format('MMM DD YYYY')
+                            : value) : <> <NavLink to={`/blog/${row._id}`} title='View blog'><VisibilityIcon/></NavLink> {" "}  <CanActivate>
+                              <NavLink to={`/blog/edit/${row._id}`} title='Edit blog'><EditIcon /></NavLink>
                               </CanActivate> </>}
                         </TableCell>
                       );
@@ -117,7 +119,7 @@ export default function StickyHeadTable() {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={props.list.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

@@ -11,4 +11,4 @@ const CanActivate = (props) => {
     )
 }
 
-export default React.memo(CanActivate);
+export default (CanActivate);

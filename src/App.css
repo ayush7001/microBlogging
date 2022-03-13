@@ -4,4 +4,13 @@
   text-align: center;
   align-items: center;
   background-color: var(--secondary-color);
+  text-decoration: none;
+}
+
+.loading {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  color: var(--secondary-color);
 }

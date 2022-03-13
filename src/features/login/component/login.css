@@ -1,0 +1,82 @@
+.login-section {
+    height: 100vh;
+    background-color: var(--white-color);
+    display: flex;
+}
+
+.login-main {
+    display: flex;
+    align-self: center;
+    margin: 0 auto;
+    width: 80%;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.login-banner {
+    height: 70vh;
+    width: 50%;
+    min-width: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.login-content {
+    padding: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-self: center;
+    text-align: center;
+    
+}
+
+.login-content .s-head {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-decoration: underline;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-bottom: 2rem;
+}
+
+.google-login-btn {
+    margin-bottom: 2rem !important;
+    width: 50%;
+    align-self: center;
+}
+
+.login-content .back-btn {
+    align-self: center;
+    width: 50%;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+@media screen and (max-width: 821px) {
+    .login-main {
+        flex-direction: column;
+    }
+
+    .login-banner {
+        width: 100%;
+        height: 30vh;
+    }
+    
+    .login-content {
+        width: 100%;
+    }
+    .google-login-btn {
+        width: 80%;
+    }
+    .login-content .back-btn {
+        width: 80%;
+        color: white;
+        font-size: 18px;
+        font-weight: 700;
+    }
+}

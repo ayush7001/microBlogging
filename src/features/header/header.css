@@ -24,3 +24,13 @@
 .header-section .login-btn:hover {
     padding-left: 1.5rem;
 }
+
+@media screen and (max-width: 821px) {
+    .header-section .heading {
+        font-size: 18px;
+    }
+
+    .header-section .login-btn {
+        font-size: 14px;
+    }
+}
