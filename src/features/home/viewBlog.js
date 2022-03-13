@@ -30,7 +30,7 @@ class ViewBlog extends React.Component {
         }
     }
     handleLikeBlog = () => {
-        if(!this.state.context.token) {
+        if(!this.context.state.token) {
             return;
         }
         this.setState({
@@ -42,6 +42,7 @@ class ViewBlog extends React.Component {
 
     updateBlogLikes = async() => {
         try {
+            console.log(this.context.state)
             const response = await axiosInstance.put(`blogs/${this.props.params.id}/likes`, {likes: this.state.blogDetail.likes}, {
                 headers: {
                     'Content-Type': 'application/json',
