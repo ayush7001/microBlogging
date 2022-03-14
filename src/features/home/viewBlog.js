@@ -76,7 +76,7 @@ class ViewBlog extends React.Component {
                 'Content-Type': 'application/json',
                 'x-access-token': this.context.state.token,
             }})
-            this.setState({blogDetail: {...this.state.blogDetail, comments: [...this.state.blogDetail.comments, commentBody]}})
+            this.setState({blogDetail: {...this.state.blogDetail, comments: [...this.state.blogDetail.comments, commentBody]}, commentText: ''})
             console.log(response)
         } catch (error) {
             console.log(error);
@@ -112,7 +112,7 @@ class ViewBlog extends React.Component {
                         <div className="avtar-image">A</div>
                         <div className='comment-info'>
                             <span className='comment-author'>{this.context?.state?.name}</span>
-                            <TextField className='comment-input' onChange={this.handleComment} placeholder='Leave your comment here' multiline rows={5} fullWidth />
+                            <TextField className='comment-input' onChange={this.handleComment} placeholder='Leave your comment here' multiline rows={5} fullWidth value={this.state.commentText} />
                             <Button className='comment-btn' disabled={this.state.commentText === "" || !this.context.state.token} onClick={this.handleSubmitComment} variant='outlined'>Comment</Button>
                         </div>
                     </div>
