@@ -12,11 +12,18 @@ import {Context as AuthContext} from '../../shared/context/Auth-context'
 import './component/blog.css'
 class ViewBlog extends React.Component {
     state = {
-        blogDetail: null
+        blogDetail: null,
+        commentText: ''
     }
 
     componentDidMount () {
         this.getBlogDetails();
+    }
+
+    handleComment = (e) => {
+        this.setState({
+            commentText: e.target.value
+        })
     }
 
     getBlogDetails = async() => {
@@ -56,12 +63,32 @@ class ViewBlog extends React.Component {
             console.log(error);
         }
     }
+
+    handleSubmitComment = async() => {
+        try {
+            const comment = this.state.commentText;
+            const commentBody =  {
+                comment: comment,
+                authorName: this.context.state.name,
+                authorEmail: this.context.state.email
+            }
+            const response = await axiosInstance.put(`blogs/${this.props.params.id}/comment`, {comment: commentBody}, {headers: {
+                'Content-Type': 'application/json',
+                'x-access-token': this.context.state.token,
+            }})
+            this.setState({blogDetail: {...this.state.blogDetail, comments: [...this.state.blogDetail.comments, commentBody]}})
+            console.log(response)
+        } catch (error) {
+            console.log(error);
+        }
+    }
     render() {
         return (
             <>
-                <section className='blog-section container'>
-                    {
-                        this.state.blogDetail ? 
+            {
+                        this.state.blogDetail ? <>
+                            <section className='blog-section container'>
+                    
                     <div className='blog-content'>
                         <div className='blog-banner' style={{backgroundImage: `url(${blogImage})`}}></div>
                         <h1>{this.state.blogDetail.blogTitle}</h1>
@@ -76,60 +103,46 @@ class ViewBlog extends React.Component {
                                 {this.state.blogDetail.blogContent}
                             </p>
                         </div>
-                    </div> : <h2 className='loading'>Loading...</h2>
-                    }
+                    </div> 
+            
                 <hr/>
                 </section>
                 <section className='comment-form-section container'>
                     <div className='comment-item'>
                         <div className="avtar-image">A</div>
                         <div className='comment-info'>
-                            <span className='comment-author'>Ayush Agarwal</span>
-                            <TextField className='comment-input' placeholder='Leave your comment here' multiline rows={5} fullWidth />
-                            <Button className='comment-btn' variant='outlined'>Comment</Button>
+                            <span className='comment-author'>{this.context?.state?.name}</span>
+                            <TextField className='comment-input' onChange={this.handleComment} placeholder='Leave your comment here' multiline rows={5} fullWidth />
+                            <Button className='comment-btn' disabled={this.state.commentText === "" || !this.context.state.token} onClick={this.handleSubmitComment} variant='outlined'>Comment</Button>
                         </div>
                     </div>
                 </section>
                 <section className='comment-section container'>
-                    <h3>7 Comments</h3>
+                    <h3>{this.state.blogDetail?.comments?.length} Comments</h3>
                     <div className='comments-list'>
-                        <div className='comment-item'>
-                            <div className="avtar-image">A</div>
-                            <div className='comment-info'>
-                                <div className="comment-info-header">
-                                    <span className='comment-author'>Ayush Agarwal</span>
-                                    <span className='comment-time'>2 Days ago</span>
-                                </div>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+                        {
+                            this.state.blogDetail.comments && this.state.blogDetail.comments.map((obj, index) => {
+                                return (
+                                    <div className='comment-item' key={index}>
+                                        <div className="avtar-image">{obj.authorName.charAt(0)}</div>
+                                        <div className='comment-info'>
+                                            <div className="comment-info-header">
+                                                <span className='comment-author'>{obj.authorName}</span>
+                                                {/* <span className='comment-time'>2 Days ago</span> */}
+                                            </div>
+                                            <p>{obj.comment}</p>
                             </div>
                         </div>
-                        <div className='comment-item'>
-                            <div className="avtar-image">A</div>
-                            <div className='comment-info'>
-                                <span className='comment-author'>Ayush Agarwal</span>
-                                <span className='comment-time'>2 Days ago</span>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
-                            </div>
-                        </div>
-                        <div className='comment-item'>
-                            <div className="avtar-image">A</div>
-                            <div className='comment-info'>
-                                <span className='comment-author'>Ayush Agarwal</span>
-                                <span className='comment-time'>2 Days ago</span>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
-                            </div>
-                        </div>
-                        <div className='comment-item'>
-                            <div className="avtar-image">A</div>
-                            <div className='comment-info'>
-                                <span className='comment-author'>Ayush Agarwal</span>
-                                <span className='comment-time'>2 Days ago</span>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
-                            </div>
-                        </div>
+                                )
+                            })
+                        }
                     </div>
                 </section>
-            </>
+                        </> : <h2 className='loading'>Loading...</h2>
+    }
+    </>
+                
+        
         )
     }
 }

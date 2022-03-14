@@ -42,7 +42,8 @@ class BlogList extends React.Component {
                     }
                     </div>
                 </div>
-                <div className='blog-list'>
+                {
+                    this.state.blogList.length > 0 ? <div className='blog-list'>
                     {
                         this.state.toggle === "list" ?
                         <StickyHeadTable list={this.state.blogList} /> : <div className='lists'>
@@ -56,7 +57,9 @@ class BlogList extends React.Component {
                         </CanActivate>
                         </div>
                     }
-                </div>
+                </div> : <h2 className='loading'>Loading...</h2>
+                }
+                
             </section>
         )
     }

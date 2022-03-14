@@ -27,6 +27,7 @@
     margin-top: 2rem;
     row-gap: 2rem;
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    margin-bottom: 3rem;
 }
 
 .blog-card {
@@ -93,4 +94,10 @@
 .icon {
     color: var(--white-color);
     align-items: center;
+}
+
+@media screen and (max-width: 797px) {
+    .blog-card:hover {
+        transform: scale(1.05);
+    }
 }
